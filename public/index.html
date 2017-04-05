@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>小栈 html-online-editor</title>
+    <link href="./style.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    <body id="main" tabindex="0">
+
+        <div id="editor">
+        </div>
+
+        <iframe id="preview">
+        </iframe>
+
+        <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+        <script src="http://ajaxorg.github.io/ace-builds/src-noconflict/ace.js" type="text/javascript" charset='utf-8'></script>
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js" type="text/javascript" charset="utf-8"></script>-->
+
+
+          <script>
+            $(function(){
+                // 初始化的html
+                var intro = ['<style>',
+                '  body {',
+                '  padding-top: 80px;',
+                '  text-align: center;',
+                '  font-family: monaco, monospace;',
+                '  background: url(https://media.giphy.com/media/rWY9ySfjytitq/giphy.gif) 50%;',
+                '  background-size: cover;',
+                '}',
+                'h1, h2 {',
+                '  display: inline-block;',
+                '  background: #fff;',
+                '}',
+                'h1 {',
+                '  font-size: 30px',
+                '}',
+                'h2 {',
+                '  font-size: 20px;',
+                '}',
+                'span {',
+                '  background: #fd0;',
+                '}',
+                '</style>',
+                '<h1>Welcome to <span>小栈编程</span></h1><br>',
+                '<h2>(请在左边的代码编辑框输入你的代码)</h2>'].join('\n');
+
+                window.editor = ace.edit("editor");
+                editor.setTheme("ace/theme/tomorrow_night_eighties");
+                editor.getSession().setMode("ace/mode/html");
+                editor.setHighlightActiveLine(false);
+                document.getElementById('editor').style.fontSize='11px';
+                editor.commands.removeCommand('gotoline');
+                editor.setShowPrintMargin(false);
+
+                editor.setValue(intro);
+
+                var iframe = document.getElementById('preview'),
+                iframedoc = iframe.contentDocument || iframe.contentWindow.document;
+                iframedoc.body.setAttribute('tabindex', 0);
+
+                // On data change, re-render the code in the iframe.
+                iframedoc.body.innerHTML = editor.getValue();                
+                editor.getSession().on('change', function(e) {
+                    iframedoc.body.innerHTML = editor.getValue();
+                    // Resize the menu icon if appropriate
+                    var linesOfCode = editor.session.getLength();
+                    if (linesOfCode < 10) {
+                    $('#menu').attr('class', 'small')
+                    } else if ( linesOfCode > 9 && linesOfCode < 99) {
+                    $('#menu').attr('class', 'medium')
+                    } else if ( linesOfCode > 99 && linesOfCode < 999) {
+                    $('#menu').attr('class', 'large')
+                    } else if (linesOfCode > 999){
+                    $('#menu').attr('class', 'x-large')
+                    }
+                });
+                
+            })
+         </script>
+    </body>    
+</html>
