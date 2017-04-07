@@ -56,12 +56,23 @@ span {
                 editor.getSession().setMode("ace/mode/html");
                 editor.setValue(intro);
 
-                var iframe = document.getElementById('preview');
-                iframedoc = iframe.contentDocument || iframe.contentWindow.document;
-                iframedoc.body.innerHTML = editor.getValue();                          
+                
+                var iframe = document.getElementById('preview'),
+                iframeWin = iframe.contentWindow || iframe,
+                iframeDoc = iframe.contentDocument || iframeWin.document;
+
+                // 可执行javascript代码，但是感觉效率有点低。
+                iframeDoc.open();
+                iframeDoc.write(editor.getValue());
+                iframeDoc.close();
+                // iframeDoc.body.innerHTML = editor.getValue();                                          
                 editor.getSession().on('change', function(e) {
-                    iframedoc.body.innerHTML = editor.getValue();
+                  iframeDoc.open();
+                  iframeDoc.write(editor.getValue());
+                  iframeDoc.close();
+                  // iframeDoc.body.innerHTML = editor.getValue();
                 });
+                
                 
             })
          </script>
