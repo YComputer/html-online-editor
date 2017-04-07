@@ -1,5 +1,11 @@
 
-
+var APP_ID = '3wsT29Gh25w8vVW5YpiiaaJA-gzGzoHsz';
+var APP_KEY = 'oztlcb68tsWC1v9Yog71Wu2V';
+AV.init({
+  appId: APP_ID,
+  appKey: APP_KEY
+});
+var HtmlOnlineEditor = AV.Object.extend('HtmlOnlineEditor');
 $(function(){
     var htmlSrc = `<!--html 代码编辑区-->
 <!DOCTYPE html>
@@ -40,46 +46,58 @@ span {
   }
   fun('mini stack')
 `;
-                // html edit area
-                window.htmlEditor = ace.edit("html-editor");
-                htmlEditor.setTheme("ace/theme/tomorrow_night_eighties");
-                htmlEditor.getSession().setMode("ace/mode/html");
-                htmlEditor.setValue(htmlSrc);
-                // css edit area
-                window.cssEditor = ace.edit("css-editor");
-                cssEditor.setTheme("ace/theme/tomorrow_night_eighties");
-                cssEditor.getSession().setMode("ace/mode/css");
-                cssEditor.setValue(cssSrc);
-                // javascript edit area
-                window.jsEditor = ace.edit("js-editor");
-                jsEditor.setTheme("ace/theme/tomorrow_night_eighties");
-                jsEditor.getSession().setMode("ace/mode/javascript");
-                jsEditor.setValue(jsSrc);
+    // html edit area
+    window.htmlEditor = ace.edit("html-editor");
+    htmlEditor.setTheme("ace/theme/tomorrow_night_eighties");
+    htmlEditor.getSession().setMode("ace/mode/html");
+    htmlEditor.setValue(htmlSrc);
+    // css edit area
+    window.cssEditor = ace.edit("css-editor");
+    cssEditor.setTheme("ace/theme/tomorrow_night_eighties");
+    cssEditor.getSession().setMode("ace/mode/css");
+    cssEditor.setValue(cssSrc);
+    // javascript edit area
+    window.jsEditor = ace.edit("js-editor");
+    jsEditor.setTheme("ace/theme/tomorrow_night_eighties");
+    jsEditor.getSession().setMode("ace/mode/javascript");
+    jsEditor.setValue(jsSrc);
 
-                var iframe = document.getElementById('preview'),
-                iframeWin = iframe.contentWindow || iframe,
-                iframeDoc = iframe.contentDocument || iframeWin.document;
+    var iframe = document.getElementById('preview'),
+    iframeWin = iframe.contentWindow || iframe,
+    iframeDoc = iframe.contentDocument || iframeWin.document;
 
-                // 这代码执行效率有点低，待改进。
-                iframeDoc.open();
-                iframeDoc.write(htmlEditor.getValue()+`<style>`+cssEditor.getValue()+`</style>`+`<script>`+jsEditor.getValue()+`<\/script>`);
-                iframeDoc.close();
+    // 这代码执行效率有点低，待改进。
+    iframeDoc.open();
+    iframeDoc.write(htmlEditor.getValue()+`<style>`+cssEditor.getValue()+`</style>`+`<script>`+jsEditor.getValue()+`<\/script>`);
+    iframeDoc.close();
 
-                htmlEditor.getSession().on('change', function(e) {
-                  iframeDoc.open();
-                  iframeDoc.write(htmlEditor.getValue()+`<style>`+cssEditor.getValue()+`</style>`+`<script>`+jsEditor.getValue()+`<\/script>`);                
-                  iframeDoc.close();
-                });
+    htmlEditor.getSession().on('change', function(e) {
+        
+        // var code = new HtmlOnlineEditor();
+        //   // 设置名称
+        // code.set('name','工作');
+        // // 设置优先级
+        // code.set('priority',1);
+        // code.save().then(function (code) {
+        //     console.log('objectId is ' + code.id);
+        // }, function (error) {
+        //     console.error(error);
+        // });
 
-                cssEditor.getSession().on('change', function(e) {
-                  iframeDoc.open();
-                  iframeDoc.write(htmlEditor.getValue()+`<style>`+cssEditor.getValue()+`</style>`+`<script>`+jsEditor.getValue()+`<\/script>`);                
-                  iframeDoc.close();
-                });
+        iframeDoc.open();
+        iframeDoc.write(htmlEditor.getValue()+`<style>`+cssEditor.getValue()+`</style>`+`<script>`+jsEditor.getValue()+`<\/script>`);                
+        iframeDoc.close();
+    });
 
-                jsEditor.getSession().on('change', function(e) {
-                  iframeDoc.open();
-                  iframeDoc.write(htmlEditor.getValue()+`<style>`+cssEditor.getValue()+`</style>`+`<script>`+jsEditor.getValue()+`<\/script>`);                
-                  iframeDoc.close();
-                });
-            })
+    cssEditor.getSession().on('change', function(e) {
+        iframeDoc.open();
+        iframeDoc.write(htmlEditor.getValue()+`<style>`+cssEditor.getValue()+`</style>`+`<script>`+jsEditor.getValue()+`<\/script>`);                
+        iframeDoc.close();
+    });
+
+    jsEditor.getSession().on('change', function(e) {
+        iframeDoc.open();
+        iframeDoc.write(htmlEditor.getValue()+`<style>`+cssEditor.getValue()+`</style>`+`<script>`+jsEditor.getValue()+`<\/script>`);                
+        iframeDoc.close();
+    });
+})
