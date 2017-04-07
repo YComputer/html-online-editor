@@ -5,7 +5,7 @@
     <link href="./style.css" rel="stylesheet" type="text/css" />
     </head>
 
-    <body id="main" tabindex="0">
+    <body id="main">
 
         <div id="editor">
         </div>
@@ -54,19 +54,11 @@ span {
                 window.editor = ace.edit("editor");
                 editor.setTheme("ace/theme/tomorrow_night_eighties");
                 editor.getSession().setMode("ace/mode/html");
-                editor.setHighlightActiveLine(false);
-                document.getElementById('editor').style.fontSize='11px';
-                editor.commands.removeCommand('gotoline');
-                editor.setShowPrintMargin(false);
-
                 editor.setValue(intro);
 
-                var iframe = document.getElementById('preview'),
+                var iframe = document.getElementById('preview');
                 iframedoc = iframe.contentDocument || iframe.contentWindow.document;
-                iframedoc.body.setAttribute('tabindex', 0);
-
-                iframedoc.body.innerHTML = editor.getValue();
-                // On data change, re-render the code in the iframe.                             
+                iframedoc.body.innerHTML = editor.getValue();                          
                 editor.getSession().on('change', function(e) {
                     iframedoc.body.innerHTML = editor.getValue();
                 });
