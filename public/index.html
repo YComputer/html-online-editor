@@ -65,7 +65,10 @@ span {
                 var jsSrc = `// javascript 代码编辑区
   
   alert('小栈编程')
-  console.log('mini stack');
+  var fun = function(arg){
+      console.log(arg)
+  }
+  fun('mini stack')
 `;
                 // html edit area
                 window.htmlEditor = ace.edit("html-editor");
