@@ -1,12 +1,20 @@
-#editor {
-  position: absolute;
-  top: 0px;
-  right: 50%;
-  bottom: 0px;
-  left: 0;
-  transition: all 0.15s;
-  -moz-transition: all 0.15s;
-  -webkit-transition: all 0.15s;
+#html-editor {
+  height: 250px;
+  width: 700px;
+  background: #2d2d2d;
+}
+
+#css-editor {
+  height: 250px;
+  width: 700px;
+  margin-top: 5px;
+  background: #2d2d2d;
+}
+
+#js-editor {
+  height: 250px;
+  width: 700px;
+  margin-top: 5px;  
   background: #2d2d2d;
 }
 
