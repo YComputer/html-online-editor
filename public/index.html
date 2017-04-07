@@ -25,6 +25,9 @@
             $(function(){
                 // 初始化的html
                 var intro = `
+<!DOCTYPE html>
+<html>
+<body>
 <style>
   body {
   padding-top: 80px;
@@ -33,7 +36,7 @@
   background: url(https://media.giphy.com/media/rWY9ySfjytitq/giphy.gif) 50%;
   background-size: cover;
 }
-h1, h2 {
+h1, h2, h3, h4, h5, h6 {
   display: inline-block;
   background: #fff;
 }
@@ -49,6 +52,10 @@ span {
 </style>
 <h1>Welcome to <span>小栈编程</span></h1><br>
 <h2>(请在左边的代码编辑框输入你的代码)</h2>
+
+
+</body>
+</html>
 `;
 
                 window.editor = ace.edit("editor");
