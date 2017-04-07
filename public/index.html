@@ -29,7 +29,7 @@
 
           <script>
             $(function(){
-                var htmlSrc = `<!--html 代码编辑区-->
+var htmlSrc = `<!--html 代码编辑区-->
 
 <!DOCTYPE html>
 <html>
@@ -39,7 +39,8 @@
 </body>
 </html>
 `;
-                var cssSrc = `/*css代码编辑区*/
+
+var cssSrc = `/*css代码编辑区*/
   
   body {
   padding-top: 80px;
@@ -62,7 +63,7 @@ span {
 }
 `;
 
-                var jsSrc = `// javascript 代码编辑区
+var jsSrc = `// javascript 代码编辑区
   
   alert('小栈编程')
   var fun = function(arg){
@@ -112,9 +113,13 @@ span {
                   iframeDoc.write(htmlEditor.getValue()+`<style>`+cssEditor.getValue()+`</style>`+`<script>`+jsEditor.getValue()+`<\/script>`);                
                   iframeDoc.close();
                 });
-                
-                
             })
+         </script>
+
+
+         <script>
+            // 下一步要解决的问题是，在线编辑代码的保存问题。
+
          </script>
     </body>    
 </html>
